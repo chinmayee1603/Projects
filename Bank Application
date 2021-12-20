@@ -1,0 +1,180 @@
+import java.util.Scanner;
+ abstract class BankAcc{
+     int Acc_no,balance;
+     String Name;
+     abstract void withdraw();
+     
+     void getdata(){
+         Scanner sc=new Scanner(System.in);
+         System.out.println("\nEnter your name");
+         Name=sc.nextLine();
+         Scanner sc1=new Scanner(System.in);
+         System.out.println("Enter your Account Number: ");
+         Acc_no=sc1.nextInt();
+         System.out.println("Enter previous balance: ");
+         balance=sc1.nextInt();
+     }
+     void display(){
+         System.out.println("\nWELCOME!!\nYour acc details are: ");
+         System.out.println("Name of Acc holder: "+Name);
+         System.out.println("Account Number: "+Acc_no);
+         System.out.println("balance= "+balance);
+     }
+     void deposit(){
+         System.out.println("Enter the amount you want to deposit: ");
+         Scanner sc1=new Scanner(System.in);
+         int dep=sc1.nextInt();
+         balance=balance+dep;
+         System.out.println("Your new account balance is: "+balance);
+     }
+ }     
+    class Savingacc extends BankAcc{
+        void withdraw(){
+            int wd;
+            System.out.println("\nEnter the amount you want to withdraw: ");
+            Scanner sc1=new Scanner(System.in);
+             wd=sc1.nextInt();
+            if(balance>1000){
+                System.out.println("You can withdraw money.");
+                balance=balance-wd;
+                System.out.println("Your balance after withdrawl: "+balance);
+            }
+            else{
+               System.out.println("You cannot withdraw money due to insufficient balance."); 
+            }
+        }
+    }
+    class Currentacc extends BankAcc{
+        void withdraw(){
+            int wd;
+            System.out.println("Enter the amount you want to withdraw: ");
+            Scanner sc1=new Scanner(System.in);
+             wd=sc1.nextInt();
+            balance=balance-wd;
+            System.out.println("\nYour balance after withdrawl: "+balance);
+        }
+    }
+     
+ 
+ public class Main{
+     public static void main(String[]args){
+         System.out.println("Choose the account type\n1.Saving Account\n2.Current Account");
+         Scanner sc1=new Scanner(System.in);
+         int choose=sc1.nextInt();
+         switch(choose){
+             case 1:
+                 Savingacc obj1=new Savingacc();
+                 obj1.getdata();
+                 obj1.display();
+                 System.out.println("1.Deposit\n2.Withdraw");
+                 int ch=sc1.nextInt();
+                 switch(ch){
+                     case 1:
+                         obj1.deposit();
+                         break;
+                     case 2:
+                         obj1.withdraw();
+                         break;
+                 }
+                 break;
+            case 2:
+                 Currentacc obj=new Currentacc();
+                 obj.getdata();
+                 obj.display();
+                 System.out.println("1.Deposit\n2.Withdraw");
+                  ch=sc1.nextInt();
+                 switch(ch){
+                     case 1:
+                         obj.deposit();
+                         break;
+                     case 2:
+                         obj.withdraw();
+                         break;
+                 }
+         }
+     }
+ }
+ 
+ 
+ OUTPUT: 
+ Choose the account type
+1.Saving Account
+2.Current Account
+1
+
+Enter your name
+chinmayee
+Enter your Account Number: 
+1200
+Enter previous balance: 
+1000
+
+WELCOME!!
+Your acc details are: 
+Name of Acc holder: chinmayee
+Account Number: 1200
+balance= 1000
+1.Deposit
+2.Withdraw
+1
+Enter the amount you want to deposit: 
+400
+Your new account balance is: 1400
+//////////////////////////////////////////////
+Choose the account type
+1.Saving Account
+2.Current Account
+2
+
+Enter your name
+Rahu
+Enter your Account Number: 
+120
+Enter previous balance: 
+450
+
+WELCOME!!
+Your acc details are: 
+Name of Acc holder: Rahu
+Account Number: 120
+balance= 450
+1.Deposit
+2.Withdraw
+1
+Enter the amount you want to deposit: 
+960
+Your new account balance is: 1410
+//////////////////////////////////////////
+Choose the account type
+1.Saving Account
+2.Current Account
+1
+
+Enter your name
+rahu
+Enter your Account Number: 
+120
+Enter previous balance: 
+2300
+
+WELCOME!!
+Your acc details are: 
+Name of Acc holder: rahu
+Account Number: 120
+balance= 2300
+1.Deposit
+2.Withdraw
+2
+
+Enter the amount you want to withdraw: 
+500
+You can withdraw money.
+Your balance after withdrawl: 1800
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
